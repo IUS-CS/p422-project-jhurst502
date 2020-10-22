@@ -1,11 +1,10 @@
-# P422 Project (REPLACE ME)
+# P422 Project
 
-Here, you should put your project proposal. It should be written in english text and describe what you intend to build along with any information necessary. Please use proper markdown formatting. You can find a guide here: [Mastering Markdown](https://guides.github.com/features/mastering-markdown/).
+My project proposal is to build a to-do list web app. This app would take data from the user with fields such as date, activity, time, etc. and store them in the MongoDB database. The client have the ability to add, update, delete, or cross off tasks. Four interactive views for the to-do list app would be:
 
-Your project should have the following requirements met:
+* A list view where the client can add things to do
+* A calendar view that displays to-do list items, where the client can click a date to see more information
+* A list view that would display to-do items in order, could possibly be filtered by order of importance
+* A “work mode” productivity timer that the client can use to time tasks or schedule breaks when working
 
-* A server side component written with javascript that stores information in a database
-* A client side component written in Angular
-* At least four different interactive views for the client
 
-You may choose whatever kid of project you like within the ethical guidlines of the university. Commit your propasal to this file and we will discuss your project idea if it needs improvement.
