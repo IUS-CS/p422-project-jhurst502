@@ -47,4 +47,6 @@ router.route('/tasks/:name')
                 return res.json(err);
             })
 
-    })
+    });
+
+module.exports = router;

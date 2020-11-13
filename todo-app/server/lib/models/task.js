@@ -1,24 +1,22 @@
 const mongoose = require('mongoose');
 
-const taskSchema = mongoose.Schema({
+const TaskSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
     },
     dueDate: {
         type: Date,
-        required: false
     },
     urgency: {
         type: Number,
-        required: true
     }
 });
 
-taskSchema.static('all', function(){
-    return this.find();
-});
+TaskSchema.query.byName = function (name) {
+  return this.where({name: name});
+}
 
-const task = mongoose.model('tasks', taskSchema);
+const task = mongoose.model('tasks', TaskSchema);
 
 module.exports = task;
