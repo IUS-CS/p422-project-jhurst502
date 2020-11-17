@@ -1,52 +1,17 @@
-let express = require('express');
-let router = express.Router();
-let task = require('./models/task');
+const express = require('express');
+const tasks = require('./controllers/tasks');
+let routes = express.Router();
 
-router.route('/tasks')
-    .get(function (req, res){
-        let options = {};
+routes.route('/tasks')
+  .get(tasks.all)
+  .put(tasks.add)
 
-        if (req.query && req.query.name) {
-            options.name = req.query.name;
-        }
+routes.route('/tasks/:name')
+  .get(tasks.byName)
 
-        task.all()
-            .then((tasks) => {
-                res.status(200);
-                res.json(tasks);
-            })
-            .catch((err) => {
-                res.status(500);
-                return res.json(err);
-            })
-    })
-    .put(function (req, res) {
-        let newTaskInfo = req.body;
+  .delete(tasks.delete)
 
-        let newTask = new task(newTaskInfo);
-        newTask.save()
-            .then(() => {
-                res.status(200);
-                res.json(newTask.valueOf());
-            })
-            .catch((err) => {
-                res.status(400);
-                return res.json(err);
-            })
-    });
+routes.route('tasks/:urgency')
+  .get(tasks.byUrgency)
 
-router.route('/tasks/:name')
-    .delete(function (req, res) {
-        task.deleteOne().where( {name: req.params.taskName}).exec()
-            .then((tasks) => {
-                res.status(200);
-                res.json(tasks);
-            })
-            .catch((err) => {
-                res.status(404);
-                return res.json(err);
-            })
-
-    });
-
-module.exports = router;
+module.exports = routes;

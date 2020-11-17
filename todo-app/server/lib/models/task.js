@@ -17,6 +17,10 @@ TaskSchema.query.byName = function (name) {
   return this.where({name: name});
 }
 
+TaskSchema.query.byUrgency = function (urgency) {
+  return this.where({urgency: urgency});
+}
+
 const task = mongoose.model('tasks', TaskSchema);
 
 module.exports = task;
