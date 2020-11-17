@@ -9,6 +9,8 @@ import { ListViewComponent } from './list-view/list-view.component';
 import { ProfileComponent } from './profile/profile.component';
 import { WorkModeComponent } from './work-mode/work-mode.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

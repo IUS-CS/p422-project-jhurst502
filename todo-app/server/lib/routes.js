@@ -8,7 +8,6 @@ routes.route('/tasks')
 
 routes.route('/tasks/:name')
   .get(tasks.byName)
-
   .delete(tasks.delete)
 
 routes.route('tasks/:urgency')
