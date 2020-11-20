@@ -8,11 +8,7 @@ module.exports = {
         res.json(err);
         return;
       }
-      let ret = [];
-      for (let task of tasks) {
-        ret.push(task.name);
-      }
-      res.json(ret);
+      res.json(tasks);
     });
   },
   byName: function (req, res) {
