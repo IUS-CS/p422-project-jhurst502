@@ -1,1 +1,50 @@
-<p>work-mode works!</p>
+<!--<p>work-mode works!</p>-->
+<!--<div>-->
+<!--  {{ (time ) }}-->
+<!--</div>-->
+<div class="timer-container d-flex justify-content-center align-items-center row">
+  <div class="timer">
+    <span class="minutes"></span>
+    <span>:</span>
+    <span class="seconds"></span>
+  </div>
+</div>
+<div class="buttons d-flex justify-content-center">
+<div class="b"><button type="button" class="btn btn-primary">Pause/Resume</button>
+  <button type="button" class="b2 btn btn-primary">Reset</button></div>
+<div class="b1"></div>
+</div>
+<style>
+  @import url('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
+
+  .timer-container {
+    position: center;
+    padding-top: 50%;
+    font-size: 8rem;
+    color: #555;
+  }
+
+  .timer {
+    transition: background 0.35s;
+    padding: 0.5em;
+    border-radius: 100%;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 20%;
+  }
+
+  .b2 {
+    padding-left: 10px;
+  }
+</style>
+

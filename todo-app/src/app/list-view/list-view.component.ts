@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Directive, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
 import {switchMap} from 'rxjs/operators';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import { TaskDataService } from '../task-data.service';
 import { Task } from '../models/task';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+
 
 @Component({
   selector: 'app-list-view',
@@ -13,7 +14,9 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class ListViewComponent implements OnInit {
   tasks: Observable<Task>;
-  taskName: Observable<string>;
+  taskNames: Observable<string[]>;
+  //taskDueDate: Observable<string[]>;
+  //taskUrgency: Observable<number[]>;
 
   constructor(
     private route: ActivatedRoute,

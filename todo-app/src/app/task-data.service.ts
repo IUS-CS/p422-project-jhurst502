@@ -28,4 +28,7 @@ export class TaskDataService {
   public getAll(): Observable<Task> {
     return this.http.get<Task>(this.url);
   }
+  public getTaskNames(): Observable<string[]> {
+    return this.http.get<string[]>(this.url);
+  }
 }

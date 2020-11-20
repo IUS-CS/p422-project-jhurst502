@@ -1,5 +1,6 @@
 const express = require('express');
 const tasks = require('./controllers/tasks');
+const timer = require('./controllers/timers');
 let routes = express.Router();
 
 routes.route('/tasks')
@@ -12,5 +13,11 @@ routes.route('/tasks/:name')
 
 routes.route('tasks/:urgency')
   .get(tasks.byUrgency)
+
+routes.route('/timer')
+  .get(timer.time)
+
+routes.route('timer/:stopped')
+  .patch(timer.stop)
 
 module.exports = routes;

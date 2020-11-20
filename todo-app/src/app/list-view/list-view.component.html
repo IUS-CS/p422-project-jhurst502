@@ -1,5 +1,21 @@
-<h1>list view works</h1>
+<h1>Current Tasks</h1>
 
-<div>
-  <h1>{{ tasks | async}}</h1>
-</div>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">Due</th>
+    <th scope="col">Task</th>
+    <th scope="col">Urgency</th>
+<!--    <th scope="col">Population</th>-->
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let task of ( tasks | async ); index as i">
+    <th scope="row">{{ (task)?.dueDate }}</th>
+    <td>
+      {{ (task)?.name }}
+    </td>
+    <td>{{ (task)?.urgency }}</td>
+  </tr>
+  </tbody>
+</table>
