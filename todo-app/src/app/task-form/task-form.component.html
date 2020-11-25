@@ -1,0 +1,25 @@
+<form [formGroup]="model">
+  <div class="form-row align-items-center">
+    <div class="col-sm-4 my-1">
+      <label class="mr-sm-3 sr-only" for="inlineFormInput">Name</label>
+      <input type="text" formControlName="name" class="form-control" id="inlineFormInput" placeholder="Type something you want to get done..." (ngModelChange)="addNewItem(model.value.name)">
+    </div>
+    <div class="col-sm-3 my-1">
+      <label class="mr-sm-3 sr-only" for="inlineFormInput">Name</label>
+      <app-datepicker></app-datepicker>
+    </div>
+    <div class="col-auto my-1">
+      <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Urgency</label>
+      <select class="custom-select mr-sm-2" formControlName="urgency" id="inlineFormCustomSelect" (ngModelChange)="addNewItem(model.value.urgency)">
+        <option selected >Priority...</option>
+        <option value="1">Low</option>
+        <option value="2">Medium</option>
+        <option value="3">High</option>
+      </select>
+    </div>
+    <div class="col-auto my-1">
+      <button type="submit" class="btn btn-primary" (click)="addTask()">Add</button>
+    </div>
+  </div>
+</form>
+

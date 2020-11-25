@@ -6,7 +6,6 @@ import { TaskDataService } from '../task-data.service';
 import { Task } from '../models/task';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
-
 @Component({
   selector: 'app-list-view',
   templateUrl: './list-view.component.html',

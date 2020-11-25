@@ -11,6 +11,9 @@ import { WorkModeComponent } from './work-mode/work-mode.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NewTaskDropdownComponent } from './new-task-dropdown/new-task-dropdown.component';
+import { TaskFormComponent } from './task-form/task-form.component';
+import { DatepickerComponent } from './datepicker/datepicker.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ProfileComponent,
     WorkModeComponent,
     PageNotFoundComponent,
+    NewTaskDropdownComponent,
+    TaskFormComponent,
+    DatepickerComponent,
   ],
   imports: [
     BrowserModule,
