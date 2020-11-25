@@ -1,13 +1,13 @@
 <p>
   <button type="button" class="btn btn-outline-primary" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"
           aria-controls="collapseExample">
-    Add Task
+    New Task
   </button>
 </p>
 <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
   <div class="card">
     <div class="card-body">
-      <app-task-form></app-task-form>
+      <app-task-form (collapsed)="parentEventHandlerFunction($event)"></app-task-form>
     </div>
   </div>
 </div>

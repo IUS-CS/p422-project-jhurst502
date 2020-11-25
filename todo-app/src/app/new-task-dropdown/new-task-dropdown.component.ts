@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {TaskDataService} from '../task-data.service';
 
 @Component({
   selector: 'app-new-task-dropdown',
@@ -6,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-task-dropdown.component.scss']
 })
 export class NewTaskDropdownComponent implements OnInit {
+  constructor(private taskDataService: TaskDataService) { }
   public isCollapsed = false;
-  constructor() { }
+
+  parentEventHandlerFunction(valueEmitted: boolean): void {
+    this.isCollapsed = valueEmitted;
+    console.log(this.isCollapsed);
+  }
 
   ngOnInit(): void {
   }

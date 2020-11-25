@@ -15,8 +15,9 @@ export class DatepickerComponent {
     private taskDataService: TaskDataService
   ) { }
   addNewItem(value: any): void {
+    const format = this.model.month + '/' + this.model.day + '/' + this.model.year;
     let data = {
-      dueDate: this.model
+      dueDate: format
     };
     this.taskDataService.updateData(data);
   }

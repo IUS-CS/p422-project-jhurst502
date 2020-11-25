@@ -15,9 +15,10 @@ export class TaskDataService {
   ) {}
   private data = {
     name: '',
-    dueDate: 0,
-    urgency: 0
+    dueDate: '',
+    urgency: Number
   };
+
   private url = '/v1/tasks';
 
   getData(): any{

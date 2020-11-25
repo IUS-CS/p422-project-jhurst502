@@ -1,5 +1,6 @@
 const Task = require('../models/task');
 
+
 module.exports = {
   all: function (req, res) {
     Task.find().exec((err, tasks) => {
