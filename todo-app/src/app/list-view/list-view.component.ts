@@ -13,6 +13,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class ListViewComponent implements OnInit {
   tasks: Observable<Task>;
+  status = '';
+  statusIsError = false;
   taskNames: Observable<string[]>;
 
   constructor(
@@ -26,5 +28,19 @@ export class ListViewComponent implements OnInit {
   }
   getTasks(): void {
     this.tasks = this.taskService.getAll();
+  }
+  delete(taskName: string): void {
+    this.taskService.deleteTask(taskName)
+      .subscribe(
+        next => {
+          this.status = 'Saved!';
+          this.statusIsError = false;
+        },
+        err => {
+          this.status = err;
+          this.statusIsError = true;
+        }
+      );
+    this.getTasks();
   }
 }
