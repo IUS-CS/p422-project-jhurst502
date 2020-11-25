@@ -66,5 +66,6 @@ export class TaskFormComponent implements OnInit {
           this.statusIsError = true;
         }
       );
+    this.model.reset();
   }
 }

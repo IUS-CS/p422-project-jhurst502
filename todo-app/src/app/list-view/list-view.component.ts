@@ -14,8 +14,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class ListViewComponent implements OnInit {
   tasks: Observable<Task>;
   taskNames: Observable<string[]>;
-  //taskDueDate: Observable<string[]>;
-  //taskUrgency: Observable<number[]>;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,7 +22,9 @@ export class ListViewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    //maybe change to for loop of each task??
+    this.tasks = this.taskService.getAll();
+  }
+  getTasks(): void {
     this.tasks = this.taskService.getAll();
   }
 }

@@ -10,7 +10,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let task of ( tasks | async );">
+  <tr *ngFor="let task of ( tasks | async )">
     <th scope="row">{{ (task)?.dueDate }}</th>
     <td>
       {{ (task)?.name }}
@@ -19,4 +19,4 @@
   </tr>
   </tbody>
 </table>
-<app-new-task-dropdown></app-new-task-dropdown>
+<app-new-task-dropdown (newTask)="getTasks()"></app-new-task-dropdown>
