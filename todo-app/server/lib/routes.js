@@ -1,5 +1,6 @@
 const express = require('express');
 const tasks = require('./controllers/tasks');
+const profiles = require('./controllers/profiles');
 const timer = require('./controllers/timers');
 let routes = express.Router();
 
@@ -11,13 +12,20 @@ routes.route('/tasks/:name')
   .get(tasks.byName)
   .delete(tasks.delete)
 
-routes.route('tasks/:urgency')
+routes.route('/tasks/:urgency')
   .get(tasks.byUrgency)
 
-routes.route('/timer')
-  .get(timer.time)
+routes.route('/profiles')
+  .put(profiles.addProfile)
 
-routes.route('timer/:stopped')
-  .patch(timer.stop)
+routes.route('/profiles/:userName')
+  .get(profiles.byName)
+
+
+// routes.route('/timer')
+//   .get(timer.time)
+//
+// routes.route('timer/:stopped')
+//   .patch(timer.stop)
 
 module.exports = routes;

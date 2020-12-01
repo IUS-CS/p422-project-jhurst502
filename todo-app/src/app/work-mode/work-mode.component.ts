@@ -26,14 +26,6 @@ export class WorkModeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.time = 10;
-    // const numbers = timer(0, 1000);
-    // numbers.subscribe(x => {
-    //   if (this.time > 0) {
-    //     this.time = this.time - 1;
-    //     }
-    //   });
-    // }
     const toggle$ = new BehaviorSubject(true);
 
     const K = 1000;
@@ -93,6 +85,7 @@ export class WorkModeComponent implements OnInit {
     });
     fromEvent(reset, 'click').subscribe(() => {
       time = 50 * K * 60;
+      toggle$.next(!toggle$.value);
     });
 
 // update current time on clicks
@@ -106,8 +99,12 @@ export class WorkModeComponent implements OnInit {
       complete: () => updateDom(of('Take a break!'), toggleElement)
     });
 
-    function updateDom(source$: Observable<string>, element: Element) {
+    function updateDom(source$: Observable<string>, element: Element): void {
       source$.subscribe((value) => element.innerHTML = value);
     }
+  }
+  Reset(K: number): number {
+    let time = 50 * K * 60;
+    return time;
   }
 }

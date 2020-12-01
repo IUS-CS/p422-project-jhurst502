@@ -11,7 +11,7 @@
 </div>
 <div class="buttons d-flex justify-content-center">
 <div class="b"><button type="button" class="btn btn-primary">Pause/Resume</button>
-  <button type="button" class="b2 btn btn-primary">Reset</button></div>
+  <button type="button" class="b2 btn btn-primary" (click)="Reset(0)">Reset</button></div>
 <div class="b1"></div>
 </div>
 <style>
@@ -31,20 +31,5 @@
     cursor: pointer;
   }
 
-  .btn-primary {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    width: 20%;
-  }
-
-  .b2 {
-    padding-left: 10px;
-  }
 </style>
 

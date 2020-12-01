@@ -36,7 +36,7 @@ module.exports = {
   },
   add: function (req, res) {
     let newTaskInfo = req.body;
-
+    newTaskInfo.name = newTaskInfo.name.trimEnd();
     let newTask = new Task(newTaskInfo);
     newTask.save()
       .then(() => {
