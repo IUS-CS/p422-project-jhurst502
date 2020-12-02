@@ -12,14 +12,22 @@ export class ProfileDataService {
     private http: HttpClient
   ) { }
   private url = '/v1/profiles';
+  private profileName;
 
+  public setProfileName(userName: string): void {
+    this.profileName = userName;
+    console.log(this.profileName);
+  }
+  public getProfileName(): string {
+    return this.profileName;
+  }
   public getProfile(userName: string): Observable<Profile> {
     return this.http.get<Profile>(`${this.url}/${userName}`);
   }
   public add(profile: Profile): Observable<any> {
     return this.http.post(this.url, profile);
   }
-  // public signIn(userName: string, password: string) {
-  //   return this.http.
-  // }
+  public signIn(profile: Profile): Observable<any> {
+    return this.http.post(`${this.url}/login`, profile);
+  }
 }

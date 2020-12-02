@@ -1,3 +1,6 @@
+<p *ngIf="logInErrorMessage">
+  <ngb-alert type="danger" closed="close(alert)">Incorrect Email Address or Password</ngb-alert>
+</p>
 <form [formGroup]="model">
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
@@ -9,6 +12,7 @@
     <small id="emailHelp" class="form-text text-muted">Must be greater than 8 characters and include a number and special character.</small>
   </div>
 
-  <button type="submit" class="btn btn-primary" (click)="signIn(model.value.password)">Sign-In</button>
-  <button type="submit" class="btn btn-primary" (click)="addProfile()">Sign-Up</button>
+  <button type="submit" class="btn btn-primary" (click)="signIn()">Sign-In</button>
+  <span></span>
+  <button type="submit" class="btn btn-outline-" (click)="addProfile()">Sign-Up</button>
 </form>

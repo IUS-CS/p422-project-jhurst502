@@ -15,6 +15,8 @@ import { NewTaskDropdownComponent } from './new-task-dropdown/new-task-dropdown.
 import { TaskFormComponent } from './task-form/task-form.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { ProfileLogInComponent } from './profile-log-in/profile-log-in.component';
+import {CalendarModule, DateAdapter} from 'angular-calendar';
+import {adapterFactory} from "angular-calendar/date-adapters/date-fns";
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { ProfileLogInComponent } from './profile-log-in/profile-log-in.component
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
   ],
   providers: [],
   bootstrap: [AppComponent]

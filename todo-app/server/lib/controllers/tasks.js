@@ -9,6 +9,7 @@ module.exports = {
         res.json(err);
         return;
       }
+      res.status(200);
       res.json(tasks);
     });
   },
@@ -20,6 +21,7 @@ module.exports = {
         res.json(err);
         return;
       }
+      res.status(200);
       res.json(task);
     });
   },
@@ -31,6 +33,7 @@ module.exports = {
         res.json(err);
         return;
       }
+      res.status(200);
       res.json(tasks);
     });
   },

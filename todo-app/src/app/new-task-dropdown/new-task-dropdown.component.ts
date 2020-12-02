@@ -18,6 +18,7 @@ export class NewTaskDropdownComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isCollapsed = true;
   }
 
 }

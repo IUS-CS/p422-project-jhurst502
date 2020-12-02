@@ -4,6 +4,8 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import { TaskDataService } from '../task-data.service';
 import { Task } from '../models/task';
+import { Profile } from "../models/profile";
+import { ProfileDataService } from "../profile-data.service";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -20,7 +22,8 @@ export class ListViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private taskService: TaskDataService
+    private taskService: TaskDataService,
+    private profileService: ProfileDataService
   ) { }
 
   ngOnInit(): void {
@@ -42,5 +45,8 @@ export class ListViewComponent implements OnInit {
         }
       );
     this.getTasks();
+  }
+  getProfile(): string {
+    return this.profileService.getProfileName();
   }
 }

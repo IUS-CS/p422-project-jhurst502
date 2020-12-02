@@ -1,13 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import {TimerDataService} from '../timer-data.service';
-import { Timer} from '../models/timer';
 import {Observable, timer, NEVER, BehaviorSubject, fromEvent, of} from 'rxjs';
 import {map, tap, takeWhile, share, startWith, switchMap, filter} from 'rxjs/operators';
 
 /**
  * Code modified from https://itnext.io/coding-a-countdown-timer-with-rxjs-b3d459935b41
- * **/
+ **/
 
 @Component({
   selector: 'app-work-mode',
@@ -19,7 +17,6 @@ export class WorkModeComponent implements OnInit {
   isStopped: boolean;
 
   constructor(
-    private timerDataService: TimerDataService,
     private router: Router,
     private route: ActivatedRoute
   ) {

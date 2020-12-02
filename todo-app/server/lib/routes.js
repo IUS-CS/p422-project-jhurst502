@@ -1,7 +1,6 @@
 const express = require('express');
 const tasks = require('./controllers/tasks');
 const profiles = require('./controllers/profiles');
-const timer = require('./controllers/timers');
 let routes = express.Router();
 
 routes.route('/tasks')
@@ -21,12 +20,7 @@ routes.route('/profiles')
 routes.route('/profiles/:userName')
   .get(profiles.byName)
 
-
-
-// routes.route('/timer')
-//   .get(timer.time)
-//
-// routes.route('timer/:stopped')
-//   .patch(timer.stop)
+routes.route('/profiles/login')
+  .post(profiles.signIn)
 
 module.exports = routes;

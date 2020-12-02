@@ -23,6 +23,7 @@ export class ProfileLogInComponent implements OnInit {
 
   profile: Profile;
 
+  logInErrorMessage: boolean;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -31,6 +32,7 @@ export class ProfileLogInComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 
   newData(): void {
     const profileData = {
@@ -65,27 +67,23 @@ export class ProfileLogInComponent implements OnInit {
     this.model.reset();
   }
 
-  signIn(password: string): void {
-    this.profileDataService.getProfile(this.model.value.userName)
+  signIn(): void {
+    this.profileDataService.signIn(this.model.value)
       .subscribe(
         next => {
+          // set user as the user???
+          this.profileDataService.setProfileName(next.userName);
           this.status = 'Found';
           this.statusIsError = false;
-          console.log(next.userName);
-          console.log(next.password);
-          const foundProfileData = {
-            userName: next.userName,
-            password: next.password
-          };
-          if (foundProfileData.password === password) {
-            console.log('Account is valid');
-          } else {
-            console.log('Not valid');
-          }
-        },
+          console.log(next);
+          this.logInErrorMessage = false;
+          },
         err => {
+          // Display login error message
           this.status = err;
           this.statusIsError = true;
+          console.log('notFound');
+          this.logInErrorMessage = true;
         }
       );
     this.model.reset();
