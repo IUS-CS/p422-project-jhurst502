@@ -1,0 +1,14 @@
+<form [formGroup]="model">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input formControlName="userName" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input formControlName="password" type="password" class="form-control" id="exampleInputPassword1">
+    <small id="emailHelp" class="form-text text-muted">Must be greater than 8 characters and include a number and special character.</small>
+  </div>
+
+  <button type="submit" class="btn btn-primary" (click)="signIn(model.value.password)">Sign-In</button>
+  <button type="submit" class="btn btn-primary" (click)="addProfile()">Sign-Up</button>
+</form>

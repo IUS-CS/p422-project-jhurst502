@@ -6,7 +6,7 @@ let routes = express.Router();
 
 routes.route('/tasks')
   .get(tasks.all)
-  .put(tasks.add)
+  .post(tasks.add)
 
 routes.route('/tasks/:name')
   .get(tasks.byName)
@@ -16,10 +16,11 @@ routes.route('/tasks/:urgency')
   .get(tasks.byUrgency)
 
 routes.route('/profiles')
-  .put(profiles.addProfile)
+  .post(profiles.addProfile)
 
 routes.route('/profiles/:userName')
   .get(profiles.byName)
+
 
 
 // routes.route('/timer')

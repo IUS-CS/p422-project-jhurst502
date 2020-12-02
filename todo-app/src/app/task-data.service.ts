@@ -48,7 +48,7 @@ export class TaskDataService {
     return this.http.delete(`${this.url}/${name}`);
   }
   public addTask(name: string, task: Task): Observable<any> {
-    return this.http.put(this.url, task);
+    return this.http.post(this.url, task);
   }
   public getAll(): Observable<Task> {
     return this.http.get<Task>(this.url);

@@ -14,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NewTaskDropdownComponent } from './new-task-dropdown/new-task-dropdown.component';
 import { TaskFormComponent } from './task-form/task-form.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
+import { ProfileLogInComponent } from './profile-log-in/profile-log-in.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
     NewTaskDropdownComponent,
     TaskFormComponent,
     DatepickerComponent,
+    ProfileLogInComponent,
   ],
   imports: [
     BrowserModule,
