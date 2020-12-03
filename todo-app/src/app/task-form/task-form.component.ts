@@ -46,7 +46,7 @@ export class TaskFormComponent implements OnInit {
 
   addTask(): void {
     this.collapsed.emit(true);
-    console.log(this.taskDataService.getData());
+    //console.log(this.taskDataService.getData());
 
     // save to DB
     const newData = this.taskDataService.getData();

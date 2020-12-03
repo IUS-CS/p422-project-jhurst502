@@ -1,112 +1,86 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import {OnInit} from '@angular/core';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import { map } from 'rxjs/operators';
-import { CalendarEvent, CalendarView } from 'angular-calendar';
+import {map} from 'rxjs/operators';
 import {
-  isSameMonth,
-  isSameDay,
-  startOfMonth,
-  endOfMonth,
-  startOfWeek,
-  endOfWeek,
+  Component,
+  ChangeDetectionStrategy,
+  ViewChild,
+  TemplateRef,
+} from '@angular/core';
+import {
   startOfDay,
   endOfDay,
-  format,
+  subDays,
+  addDays,
+  endOfMonth,
+  isSameDay,
+  isSameMonth,
+  addHours,
 } from 'date-fns';
-import { Observable } from 'rxjs';
-//import { colors } from '../demo-utils/colors';
+import {Observable, Subject} from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  CalendarEvent,
+  CalendarEventAction,
+  CalendarEventTimesChangedEvent,
+  CalendarView,
+} from 'angular-calendar';
+import {TaskDataService} from "../task-data.service";
+import {Task} from "../models/task";
 
-interface Film {
-  id: number;
-  title: string;
-  release_date: string;
-}
-
-function getTimezoneOffsetString(date: Date): string {
-  const timezoneOffset = date.getTimezoneOffset();
-  const hoursOffset = String(
-    Math.floor(Math.abs(timezoneOffset / 60))
-  ).padStart(2, '0');
-  const minutesOffset = String(Math.abs(timezoneOffset % 60)).padEnd(2, '0');
-  const direction = timezoneOffset > 0 ? '-' : '+';
-
-  return `T00:00:00${direction}${hoursOffset}:${minutesOffset}`;
-}
+const colors: any = {
+  red: {
+    primary: '#ad2121',
+    secondary: '#FAE3E3',
+  },
+  blue: {
+    primary: '#1e90ff',
+    secondary: '#D1E8FF',
+  },
+  yellow: {
+    primary: '#e3bc08',
+    secondary: '#FDF1BA',
+  },
+};
 
 @Component({
   selector: 'app-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./calendar.component.scss'],
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit{
+  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+  status = '';
+  statusIsError = false;
+  tasks: Observable<Task>;
+  task: Task;
   view: CalendarView = CalendarView.Month;
+
+  CalendarView = CalendarView;
 
   viewDate: Date = new Date();
 
-  events$: Observable<CalendarEvent<{ film: Film }>[]>;
+  modalData: {
+    action: string;
+    event: CalendarEvent;
+  };
 
-  activeDayIsOpen: boolean = false;
+  refresh: Subject<any> = new Subject();
 
-  constructor(private http: HttpClient) {}
+  events: CalendarEvent[] = [];
+
+  activeDayIsOpen: boolean = true;
+
+  constructor(private modal: NgbModal,
+              private taskService: TaskDataService) {}
 
   ngOnInit(): void {
-    this.fetchEvents();
-  }
+        this.getTasks();
+    }
 
-  fetchEvents(): void {
-    const getStart: any = {
-      month: startOfMonth,
-      week: startOfWeek,
-      day: startOfDay,
-    }[this.view];
-
-    const getEnd: any = {
-      month: endOfMonth,
-      week: endOfWeek,
-      day: endOfDay,
-    }[this.view];
-
-    const params = new HttpParams()
-      .set(
-        'primary_release_date.gte',
-        format(getStart(this.viewDate), 'yyyy-MM-dd')
-      )
-      .set(
-        'primary_release_date.lte',
-        format(getEnd(this.viewDate), 'yyyy-MM-dd')
-      )
-      .set('api_key', '0ec33936a68018857d727958dca1424f');
-
-    this.events$ = this.http
-      .get('https://api.themoviedb.org/3/discover/movie', { params })
-      .pipe(
-        map(({ results }: { results: Film[] }) => {
-          return results.map((film: Film) => {
-            return {
-              title: film.title,
-              start: new Date(
-                film.release_date + getTimezoneOffsetString(this.viewDate)
-              ),
-              //color: colors.yellow,
-              allDay: true,
-              meta: {
-                film,
-              },
-            };
-          });
-        })
-      );
-  }
-
-  dayClicked({
-               date,
-               events,
-             }: {
-    date: Date;
-    events: CalendarEvent<{ film: Film }>[];
-  }): void {
+  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
       if (
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
@@ -115,15 +89,49 @@ export class CalendarComponent implements OnInit {
         this.activeDayIsOpen = false;
       } else {
         this.activeDayIsOpen = true;
-        this.viewDate = date;
       }
+      this.viewDate = date;
     }
   }
 
-  eventClicked(event: CalendarEvent<{ film: Film }>): void {
-    window.open(
-      `https://www.themoviedb.org/movie/${event.meta.film.id}`,
-      '_blank'
-    );
+  handleEvent(action: string, event: CalendarEvent): void {
+    this.modalData = { event, action };
+    this.modal.open(this.modalContent, { size: 'lg' });
+  }
+
+
+  setView(view: CalendarView): void {
+    this.view = view;
+  }
+
+  closeOpenMonthViewDay(): void {
+    this.activeDayIsOpen = false;
+  }
+
+  getTasks(): void {
+    this.taskService.getAll()
+      .subscribe(
+        next => {
+          this.task = next;
+          this.addCalendarEvents();
+          console.log(this.task);
+          this.statusIsError = false;
+        },
+        err => {
+          this.status = err;
+          this.statusIsError = true;
+        }
+      );
+  }
+  addCalendarEvents(): void {
+    for (let i = 0; this.task[i]; i++) {
+      this.events.push({
+        start: startOfDay(new Date(`${(this.task[i].dueDate.month)} ${(this.task[i].dueDate.day)}, ${(this.task[i].dueDate.year)}`)),
+        title: this.task[i].name,
+        color: colors.yellow,
+        //actions: this.actions,
+      });
+      console.log((`${(this.task[i].dueDate.month)} ${(this.task[i].dueDate.day)}, ${(this.task[i].dueDate.year)}`));
+    }
   }
 }

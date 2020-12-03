@@ -6,7 +6,11 @@ const TaskSchema = mongoose.Schema({
         required: true
     },
     dueDate: {
-        type: String,
+        type: {
+          month: String,
+          day: Number,
+          year: Number,
+        }
     },
     urgency: {
         type: Number,
