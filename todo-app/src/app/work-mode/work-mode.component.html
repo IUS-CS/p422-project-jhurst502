@@ -1,37 +1,26 @@
-<!--<p>work-mode works!</p>-->
-<!--<div>-->
-<!--  {{ (time ) }}-->
-<!--</div>-->
-<div class="timer-container d-flex justify-content-center align-items-center row">
-  <div class="timer">
-    <span class="minutes"></span>
-    <span>:</span>
-    <span class="seconds"></span>
+<div class="d-flex flex-column bd-highlight mb-3" *ngIf="!timeEntered">
+  <div class="d-flex justify-content-center">Enter Work-Session Time (HH:MM)</div>
+  <div class="d-flex justify-content-center"><ngb-timepicker [(ngModel)]="time"></ngb-timepicker></div>
+  <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-primary" (click)="submitTime()">Save</button>
   </div>
 </div>
-<div class="buttons d-flex justify-content-center">
-<div class="b">
-  <button type="button" class="btn btn-primary">Pause/Resume</button>
-  <span></span>
-  <button type="button" class="b2 btn btn-primary" (click)="Reset(0)">Reset</button></div>
-<div class="b1"></div>
+
+<div class="d-flex flex-column bd-highlight mb-3" *ngIf="timeEntered">
+  <div class="d-flex justify-content-center"><countdown #cd [config]="{leftTime: timeToNumber, notify: 0, demand: false, prettyText: 'clockText'}"></countdown></div>
+  <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-primary" (click)="cd.pause()">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pause-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"/>
+      </svg>
+    </button>
+    <span></span>
+    <button type="button" class="btn btn-primary" (click)="cd.resume()">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-play-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+      </svg>
+    </button>
+    <span></span>
+    <button type="button" class="btn btn-primary" (click)="cd.restart()">Reset</button>
+  </div>
 </div>
-<style>
-  @import url('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
-
-  .timer-container {
-    position: center;
-    padding-top: 50%;
-    font-size: 8rem;
-    color: #555;
-  }
-
-  .timer {
-    transition: background 0.35s;
-    padding: 0.5em;
-    border-radius: 100%;
-    cursor: pointer;
-  }
-
-</style>
-
