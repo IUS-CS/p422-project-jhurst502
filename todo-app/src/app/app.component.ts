@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {ProfileDataService} from './profile-data.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'todo-app';
+
+  constructor(
+    private profileService: ProfileDataService
+  ) {
+  }
+
+  logOut(): void {
+    console.log(this.profileService.getProfileName());
+    this.profileService.setProfileName('');
+    console.log(this.profileService.getProfileName());
+  }
 }

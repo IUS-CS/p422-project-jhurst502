@@ -75,7 +75,7 @@ export class ProfileLogInComponent implements OnInit {
           this.profileDataService.setProfileName(next.userName);
           this.status = 'Found';
           this.statusIsError = false;
-          console.log(next);
+          console.log(this.profileDataService.getProfileName());
           this.logInErrorMessage = false;
           },
         err => {

@@ -38,12 +38,12 @@ export class TaskDataService {
     console.log(this.data);
   }
 
-  public getTaskName(name: string): Observable<Task> {
-    return this.http.get<Task>(`${this.url}/${name}`);
-  }
-  public getTaskUrgency(urgency: string): Observable<Task> {
-    return this.http.get<Task>(`${this.url}/${urgency}`);
-  }
+  // public getTaskName(name: string): Observable<Task> {
+  //   return this.http.get<Task>(`${this.url}/${name}`);
+  // }
+  // public getTaskUrgency(urgency: string): Observable<Task> {
+  //   return this.http.get<Task>(`${this.url}/${urgency}`);
+  // }
   public deleteTask(name: string): Observable<any> {
     return this.http.delete(`${this.url}/${name}`);
   }
@@ -53,10 +53,13 @@ export class TaskDataService {
   public getAll(): Observable<Task> {
     return this.http.get<Task>(this.url);
   }
+  public sortByUrgency(): Observable<Task> {
+    return this.http.get<Task>(`${this.url}/byUrgency`);
+  }
+  public sortByDate(): Observable<Task> {
+    return this.http.get<Task>(`${this.url}/byDate`);
+  }
   public getTasksObj(): object {
     return this.http.get(this.url);
-  }
-  public getTaskNames(): Observable<string[]> {
-    return this.http.get<string[]>(this.url);
   }
 }

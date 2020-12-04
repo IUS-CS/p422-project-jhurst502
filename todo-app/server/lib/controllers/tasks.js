@@ -61,5 +61,27 @@ module.exports = {
         res.status(404);
         return res.json(err);
       });
+  },
+  sortByUrgency: function (req, res) {
+    Task.find().sort({urgency: -1}).exec((err, tasks) => {
+      if (err) {
+        res.status(500);
+        res.json(err);
+        return;
+      }
+      res.status(200);
+      res.json(tasks);
+    });
+  },
+  sortByDate: function (req, res) {
+    Task.find().sort({dueDate: 1}).exec((err, tasks) => {
+      if (err) {
+        res.status(500);
+        res.json(err);
+        return;
+      }
+      res.status(200);
+      res.json(tasks);
+    });
   }
 }

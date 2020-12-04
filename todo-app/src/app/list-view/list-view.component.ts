@@ -8,6 +8,7 @@ import { Profile } from "../models/profile";
 import { ProfileDataService } from "../profile-data.service";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
+
 @Component({
   selector: 'app-list-view',
   templateUrl: './list-view.component.html',
@@ -25,7 +26,6 @@ export class ListViewComponent implements OnInit {
     private taskService: TaskDataService,
     private profileService: ProfileDataService
   ) { }
-
   ngOnInit(): void {
     this.tasks = this.taskService.getAll();
   }
@@ -49,4 +49,12 @@ export class ListViewComponent implements OnInit {
   getProfile(): string {
     return this.profileService.getProfileName();
   }
+  byUrgency(): void {
+    this.tasks = this.taskService.sortByUrgency();
+  }
+  byDate(): void {
+    this.tasks = this.taskService.sortByDate();
+  }
 }
+
+

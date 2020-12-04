@@ -1,18 +1,17 @@
 <h1>Current Tasks</h1>
 
-<table class="table table-striped" *ngIf="!getProfile()">
-<!--  banner "Sign in for custom tasks"-->
+<table class="table table-striped">
   <thead>
   <tr>
-    <th scope="col">Due</th>
+    <th scope="col" (click)="byDate()">Due</th>
     <th scope="col">Task</th>
-    <th scope="col">Urgency</th>
+    <th scope="col" (click)="byUrgency()">Urgency</th>
     <th scope="col"></th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let task of ( tasks | async )">
-    <th scope="row">{{ (task)?.dueDate }}</th>
+    <th scope="row">{{ (task)?.dueDate.month }} {{ (task)?.dueDate.day }}, {{ (task)?.dueDate.year }}</th>
     <td>{{ (task)?.name }}</td>
     <td *ngIf="!(task).urgency"></td>
     <td *ngIf="(task).urgency == 1">Low</td>

@@ -16,8 +16,8 @@ import { TaskFormComponent } from './task-form/task-form.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { ProfileLogInComponent } from './profile-log-in/profile-log-in.component';
 import {CalendarModule, DateAdapter} from 'angular-calendar';
-import {adapterFactory} from "angular-calendar/date-adapters/date-fns";
-import {NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [

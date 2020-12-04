@@ -26,8 +26,8 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView,
 } from 'angular-calendar';
-import {TaskDataService} from "../task-data.service";
-import {Task} from "../models/task";
+import {TaskDataService} from '../task-data.service';
+import {Task} from '../models/task';
 
 const colors: any = {
   red: {
@@ -129,7 +129,7 @@ export class CalendarComponent implements OnInit{
         start: startOfDay(new Date(`${(this.task[i].dueDate.month)} ${(this.task[i].dueDate.day)}, ${(this.task[i].dueDate.year)}`)),
         title: this.task[i].name,
         color: colors.yellow,
-        //actions: this.actions,
+        // actions: this.actions,
       });
       console.log((`${(this.task[i].dueDate.month)} ${(this.task[i].dueDate.day)}, ${(this.task[i].dueDate.year)}`));
     }
