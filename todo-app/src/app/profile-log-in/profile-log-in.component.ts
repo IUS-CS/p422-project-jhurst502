@@ -71,7 +71,7 @@ export class ProfileLogInComponent implements OnInit {
     this.profileDataService.signIn(this.model.value)
       .subscribe(
         next => {
-          // set user as the user???
+          // set user as the user
           this.profileDataService.setProfileName(next.userName);
           this.status = 'Found';
           this.statusIsError = false;

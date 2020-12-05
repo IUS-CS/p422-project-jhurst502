@@ -3,6 +3,17 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 module.exports = {
+  all: function (req, res) {
+    Profile.find().exec((err, profiles) => {
+      if (err) {
+        res.status(404);
+        res.json(err);
+        return;
+      }
+      res.status(200);
+      res.json(profiles);
+    });
+  },
   byName: function (req, res) {
     const userName = req.params.userName;
     Profile.findOne().byUserName(userName).exec((err, profile) => {
@@ -34,23 +45,40 @@ module.exports = {
     });
   },
   signIn: function (req, res) {
-    let signInData = req.body;
-    Profile.findOne().byUserName(signInData.userName).exec((err, profile) => {
+    let signInUser = req.body.userName;
+    let signInPassword = req.body.password;
+    Profile.findOne().byUserName(signInUser).exec((err, profile) => {
       if (err) {
         res.status(500);
         res.json(err);
         return;
       }
-      console.log(profile.password);
-      bcrypt.compare(signInData.password, profile.password, function(err, result) {
-        if (result == true) {
-          res.status(200);
-          res.json(profile);
-        } else {
-          res.status(404);
-          res.json('Username or Password incorrect');
-        }
-      });
+      if (profile !== null) {
+        bcrypt.compare(signInPassword, profile.password, function (err, result) {
+          if (result == true) {
+            res.status(200);
+            res.json(profile);
+          } else {
+            res.status(404);
+            res.json('Username or Password incorrect');
+          }
+        });
+      } else {
+        res.status(404);
+        res.json('Username or Password incorrect');
+      }
     });
+  },
+  delete: function (req, res) {
+    const userName = req.params.userName;
+    Profile.deleteOne().where(userName).exec()
+      .then((profiles) => {
+        res.status(200);
+        res.json(profiles);
+      })
+      .catch((err) => {
+        res.status(404);
+        res.json('User not found');
+      })
   }
 }

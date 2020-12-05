@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Profile } from './models/profile';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class ProfileDataService {
 
   public setProfileName(userName: string): void {
     this.profileName = userName;
-    console.log(this.profileName);
+    console.log(`logged in user: ${this.profileName}`);
   }
   public getProfileName(): string {
     return this.profileName;
